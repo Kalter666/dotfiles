@@ -2,8 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh/
-
+export ZSH="$HOME/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -70,7 +69,7 @@ ZSH_THEME="clean"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-interactive-cd)
+plugins=(git zsh-autosuggestions zsh-interactive-cd)
 
 # User configuration
 
@@ -110,36 +109,35 @@ USE_POWERLINE="true"
 
 export NVM_DIR=~/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-source /usr/share/nvm/init-nvm.sh
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
-
-export PATH="/Users/iakov/miniconda3/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/iakovk/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/ikosiakov/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/iakovk/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/iakovk/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/Users/ikosiakov/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/ikosiakov/opt/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/iakovk/anaconda3/bin:$PATH"
+        export PATH="/Users/ikosiakov/opt/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<
+
 addToPathFront() {
     if [[ "$PATH" != *"$1"* ]]; then
         export PATH=$1:$PATH
     fi
 }
+
 addToPathFront $HOME/.config/scripts/
 bindkey -s ^f "tmux-sessionizer\n"
 alias vim=nvim
 alias mg=mambembe
-eval "$(zoxide init zsh)"
 
+[ -f "/Users/ikosiakov/.ghcup/env" ] && source "/Users/ikosiakov/.ghcup/env" # ghcup-env
+eval "$(zoxide init zsh)"
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
@@ -157,3 +155,4 @@ function yy() {
 }
 
 export DOT=$HOME/dotfiles/
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
