@@ -58,6 +58,7 @@ M.mason = {
     "cpplint",
     "hadolint",
     "markdownlint",
+    "marksman",
     "revive",
     "stylelint",
     "cmake-language-server",
