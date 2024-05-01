@@ -19,6 +19,11 @@ local servers = {
   "zls",
   "gopls",
   "marksman",
+  "yamlls",
+  "typos_lsp",
+  "dockerls",
+  "docker_compose_language_service",
+  "taplo",
 }
 
 for _, lsp in ipairs(servers) do

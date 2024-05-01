@@ -65,6 +65,10 @@ M.mason = {
     "yaml-language-server",
     "gopls",
     "angular-language-server",
+    "typos-lsp",
+    "dockerfile-language-server",
+    "docker-compose-language-service",
+    "taplo",
   },
 }
 
