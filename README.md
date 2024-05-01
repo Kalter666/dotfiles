@@ -1,3 +1,3 @@
 # dotfiles
 
-Just run ``stow .``
+Just run `stow .`

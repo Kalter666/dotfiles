@@ -18,6 +18,7 @@ local servers = {
   "cmake",
   "zls",
   "gopls",
+  "marksman",
 }
 
 for _, lsp in ipairs(servers) do
