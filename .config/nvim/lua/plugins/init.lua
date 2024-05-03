@@ -139,6 +139,7 @@ return {
     config = function(_, opts)
       require("todo-comments").setup(opts)
     end,
+    lazy = false,
   },
   {
     "m-demare/hlargs.nvim",
