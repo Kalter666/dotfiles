@@ -104,6 +104,7 @@ return {
     config = function()
       require("codeium").setup {}
     end,
+    lazy = false,
   },
   {
     "folke/todo-comments.nvim",
