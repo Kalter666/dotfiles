@@ -158,4 +158,3 @@ function yy() {
 
 export DOT=$HOME/dotfiles/
 
-eval $(thefuck --alias)
