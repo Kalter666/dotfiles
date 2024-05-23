@@ -45,7 +45,7 @@ args = ["new-session", "-A", "-s", "main"]
 program = "/opt/homebrew/bin/tmux"
 
 [window]
-decorations = "buttonless"
+decorations = "full"
 dynamic_title = true
 startup_mode = "Maximized"
 
