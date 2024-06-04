@@ -45,11 +45,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = overrides.treesitter,
   },
-
-  {
-    "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
-  },
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
@@ -298,6 +293,43 @@ return {
     "hrsh7th/nvim-cmp",
     opts = function()
       return require "configs.cmp"
+    end,
+  },
+  ---@type LazySpec
+  {
+    "mikavilpas/yazi.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    event = "VeryLazy",
+    keys = {
+      -- 👇 in this section, choose your own keymappings!
+      {
+        "<leader>-",
+        function()
+          require("yazi").yazi()
+        end,
+        desc = "Open the file manager",
+      },
+      {
+        -- Open in the current working directory
+        "<leader>cw",
+        function()
+          require("yazi").yazi(nil, vim.fn.getcwd())
+        end,
+        desc = "Open the file manager in nvim's working directory",
+      },
+    },
+    ---@type YaziConfig
+    opts = {
+      open_for_directories = false,
+    },
+  },
+  {
+    "MagicDuck/grug-far.nvim",
+    cmd = { "GrugFar" },
+    config = function()
+      require("grug-far").setup {}
     end,
   },
 }
