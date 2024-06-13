@@ -7,7 +7,6 @@ local lspconfig = require "lspconfig"
 local servers = {
   "html",
   "cssls",
-  "tsserver",
   "clangd",
   "pyright",
   "angularls",
@@ -24,6 +23,7 @@ local servers = {
   "dockerls",
   "docker_compose_language_service",
   "taplo",
+  "tsserver",
 }
 
 for _, lsp in ipairs(servers) do
@@ -41,17 +41,3 @@ for _, lsp in ipairs(servers) do
   }
 end
 -- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-  }
-end
-
--- typescript
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
