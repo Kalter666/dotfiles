@@ -69,6 +69,7 @@ M.mason = {
     "dockerfile-language-server",
     "docker-compose-language-service",
     "taplo",
+    "vtls",
   },
 }
 

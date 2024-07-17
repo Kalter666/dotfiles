@@ -23,7 +23,6 @@ local servers = {
   "dockerls",
   "docker_compose_language_service",
   "taplo",
-  "tsserver",
 }
 
 for _, lsp in ipairs(servers) do
@@ -41,3 +40,41 @@ for _, lsp in ipairs(servers) do
   }
 end
 -- lsps with default config
+
+local vtslsSettings = {
+  referencesCodeLens = {
+    enable = true,
+    showOnAllFunctions = true,
+  },
+  inlayHints = {
+    parameterNames = {
+      enabled = "literals",
+    },
+    parameterTypes = {
+      enabled = true,
+    },
+    variableTypes = {
+      enabled = false,
+    },
+    propertyDeclarationTypes = {
+      enabled = true,
+    },
+    functionLikeReturnTypes = {
+      enabled = true,
+    },
+    enumMemberValues = {
+      enabled = true,
+    },
+  },
+}
+
+lspconfig.vtsls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  on_init = on_init,
+  settings = {
+    typescript = vtslsSettings,
+    javascript = vtslsSettings,
+  },
+}
+
