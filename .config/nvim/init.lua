@@ -12,6 +12,8 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+vim.lsp.inlay_hint.enable(true)
+
 local lazy_config = require "configs.lazy"
 
 -- load plugins
