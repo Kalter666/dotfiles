@@ -89,18 +89,18 @@ return {
     "wakatime/vim-wakatime",
     lazy = false,
   },
-  {
-    "Exafunction/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    cmd = "Codeium",
-    config = function()
-      require("codeium").setup {}
-    end,
-    lazy = false,
-  },
+  -- {
+  --   "Exafunction/codeium.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   cmd = "Codeium",
+  --   config = function()
+  --     require("codeium").setup {}
+  --   end,
+  --   lazy = false,
+  -- },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
