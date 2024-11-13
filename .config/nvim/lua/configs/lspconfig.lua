@@ -12,7 +12,7 @@ local servers = {
   "angularls",
   "hls",
   "eslint",
-  "ruff_lsp",
+  "ruff",
   "jsonls",
   "cmake",
   "zls",
