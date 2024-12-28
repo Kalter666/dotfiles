@@ -1,0 +1,6 @@
+font-size = 14
+font-family = "FiraCode Nerd Font Mono"
+theme = catppuccin-mocha
+shell-integration = zsh
+cursor-style = block
+command = zsh --login -c "set -x; tmux attach || tmux new-session"

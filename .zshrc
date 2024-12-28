@@ -132,6 +132,7 @@ addToPathFront() {
 }
 
 addToPathFront $HOME/.config/scripts/
+addToPathFront $HOME/.local/bin/scripts/
 bindkey -s ^f "tmux-sessionizer\n"
 alias vim=nvim
 alias mg=mambembe
