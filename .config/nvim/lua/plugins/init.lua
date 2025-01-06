@@ -31,7 +31,6 @@ return {
     },
     config = function()
       require "configs.lspconfig"
-      require "configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
 
@@ -285,11 +284,6 @@ return {
     "RRethy/vim-illuminate",
   },
   {
-    "mrcjkb/rustaceanvim",
-    version = "^4", -- Recommended
-    lazy = false, -- This plugin is already lazy
-  },
-  {
     "hrsh7th/nvim-cmp",
     opts = function()
       return require "configs.cmp"
@@ -332,10 +326,11 @@ return {
       require("grug-far").setup {}
     end,
   },
+  "williamboman/mason-lspconfig.nvim",
   {
     "zeioth/none-ls-autoload.nvim",
     event = "BufEnter",
     dependencies = { "williamboman/mason.nvim", "nvimtools/none-ls.nvim" },
-    opts = {},
+    opts = { diagnostics = true, formatting = true, code_actions = true, completion = true, hover = true },
   },
 }
