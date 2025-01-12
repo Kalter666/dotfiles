@@ -165,3 +165,6 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475a \
 --multi"
 source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+
+# Added by Windsurf
+export PATH="/Users/ikosiakov/.codeium/windsurf/bin:$PATH"
