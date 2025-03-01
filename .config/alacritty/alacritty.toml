@@ -58,6 +58,6 @@ y = 10
 [general]
 
 live_config_reload = true
-import = ["~/.config/alacritty/themes/themes/catppuccin.toml"]
+import = ["~/.config/alacritty/catppuccin-mocha.toml"]
 
 [terminal]
