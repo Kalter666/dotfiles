@@ -146,6 +146,7 @@ source <(ng completion script)
 
 export FPATH="./config/eza-community/completions/zsh:$FPATH"
 alias e="eza --icons=always"
+alias lzd='lazydocker'
 
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
