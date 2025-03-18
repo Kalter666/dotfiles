@@ -40,3 +40,6 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+vim.wo.number = true
+vim.wo.relativenumber = true
