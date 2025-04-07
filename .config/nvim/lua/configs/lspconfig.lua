@@ -41,7 +41,44 @@ for _, lsp in ipairs(servers) do
 end
 -- lsps with default config
 
-local vtslsSettings = {
+-- local vtslsSettings = {
+--   referencesCodeLens = {
+--     enable = true,
+--     showOnAllFunctions = true,
+--   },
+--   inlayHints = {
+--     parameterNames = {
+--       enabled = "literals",
+--     },
+--     parameterTypes = {
+--       enabled = true,
+--     },
+--     variableTypes = {
+--       enabled = false,
+--     },
+--     propertyDeclarationTypes = {
+--       enabled = true,
+--     },
+--     functionLikeReturnTypes = {
+--       enabled = true,
+--     },
+--     enumMemberValues = {
+--       enabled = true,
+--     },
+--   },
+-- }
+--
+-- lspconfig.ts_ls.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   on_init = on_init,
+--   settings = {
+--     typescript = vtslsSettings,
+--     javascript = vtslsSettings,
+--   },
+-- }
+
+local tsSettings = {
   referencesCodeLens = {
     enable = true,
     showOnAllFunctions = true,
@@ -68,13 +105,13 @@ local vtslsSettings = {
   },
 }
 
-lspconfig.vtsls.setup {
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   on_init = on_init,
   settings = {
-    typescript = vtslsSettings,
-    javascript = vtslsSettings,
+    typescript = tsSettings,
+    javascript = tsSettings,
   },
 }
 
