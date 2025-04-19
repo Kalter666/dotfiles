@@ -4,9 +4,6 @@
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh/
 
-ZSH_CACHE_DIR="$HOME/.cache/zsh"
-[[ ! -d $ZSH_CACHE_DIR ]] && mkdir -p $ZSH_CACHE_DIR
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -116,18 +113,18 @@ export NVM_DIR=~/.nvm
 source /usr/share/nvm/init-nvm.sh
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
-export PATH="/Users/iakov/miniconda3/bin:$PATH"
+export PATH="/Users/kalter/miniconda3/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/iakovk/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/kalter/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/iakovk/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/iakovk/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/kalter/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/kalter/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/iakovk/anaconda3/bin:$PATH"
+        export PATH="/home/kalter/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
