@@ -85,10 +85,6 @@ return {
     ft = { "d2" },
     lazy = true,
   },
-  {
-    "wakatime/vim-wakatime",
-    lazy = false,
-  },
   -- {
   --   "Exafunction/codeium.nvim",
   --   dependencies = {

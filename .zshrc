@@ -79,6 +79,8 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-interactive-cd)
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
+export LC_ALL=en_US.UTF-8
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -112,6 +114,31 @@ export NVM_DIR=~/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 source /usr/share/nvm/init-nvm.sh
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+# autoload node version via nvm
+autoload -U add-zsh-hook
+
+load-nvmrc() {
+  local nvmrc_path
+  nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version
+    nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+      nvm use
+    fi
+  elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 export PATH="/Users/kalter/miniconda3/bin:$PATH"
 
@@ -169,3 +196,4 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475a \
 --multi"
 
+source ~/kubeload.zsh
