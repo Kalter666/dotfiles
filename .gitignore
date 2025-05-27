@@ -1,2 +1,5 @@
 .config/tmux/plugins/
 .config/alacritty/themes/
+.config/configstore
+.config/go
+.config/nvim/lazy-lock.json

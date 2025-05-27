@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh/
+ZSH="$HOME/.oh-my-zsh"
 
 ZSH_CACHE_DIR="$HOME/.cache/zsh"
 [[ ! -d $ZSH_CACHE_DIR ]] && mkdir -p $ZSH_CACHE_DIR
@@ -111,9 +111,9 @@ source $ZSH/oh-my-zsh.sh
 # Use powerline
 USE_POWERLINE="true"
 
-export NVM_DIR=~/.nvm
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-source /usr/share/nvm/init-nvm.sh
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
 export PATH="/Users/iakov/miniconda3/bin:$PATH"
@@ -164,7 +164,7 @@ export DOT=$HOME/dotfiles/
 
 source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
-source <(fzf --zsh)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
@@ -172,3 +172,8 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475a \
 --multi"
 
+
+addToPathFront "$HOME/go/bin"
+addToPathFront "$HOME/.cargo/bin"
+
+[ -f "/home/iakov/.ghcup/env" ] && . "/home/iakov/.ghcup/env" # ghcup-envsource /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
