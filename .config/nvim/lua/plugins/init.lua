@@ -280,12 +280,7 @@ return {
   {
     "RRethy/vim-illuminate",
   },
-  {
-    "hrsh7th/nvim-cmp",
-    opts = function()
-      return require "configs.cmp"
-    end,
-  },
+  { import = "nvchad.blink.lazyspec" },
   ---@type LazySpec
   {
     "mikavilpas/yazi.nvim",

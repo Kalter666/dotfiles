@@ -79,6 +79,13 @@ end
 -- }
 
 local tsSettings = {
+  init_options = {
+    preferences = {
+      -- other preferences...
+      importModuleSpecifierPreference = "relative",
+      importModuleSpecifierEnding = "minimal",
+    },
+  },
   referencesCodeLens = {
     enable = true,
     showOnAllFunctions = true,
