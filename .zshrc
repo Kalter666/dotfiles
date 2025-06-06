@@ -4,9 +4,6 @@
 # Path to your oh-my-zsh installation.
 ZSH="$HOME/.oh-my-zsh"
 
-ZSH_CACHE_DIR="$HOME/.cache/zsh"
-[[ ! -d $ZSH_CACHE_DIR ]] && mkdir -p $ZSH_CACHE_DIR
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -82,6 +79,8 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-interactive-cd)
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
+export LC_ALL=en_US.UTF-8
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -116,18 +115,43 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
-export PATH="/Users/iakov/miniconda3/bin:$PATH"
+# autoload node version via nvm
+autoload -U add-zsh-hook
+
+load-nvmrc() {
+  local nvmrc_path
+  nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version
+    nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+      nvm use
+    fi
+  elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+export PATH="/Users/kalter/miniconda3/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/iakovk/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/kalter/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/iakovk/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/iakovk/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/kalter/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/kalter/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/iakovk/anaconda3/bin:$PATH"
+        export PATH="/home/kalter/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup

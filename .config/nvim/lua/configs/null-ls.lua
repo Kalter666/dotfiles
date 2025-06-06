@@ -5,7 +5,7 @@ local sources = {
 
   -- webdev stuff
   b.formatting.prettier.with { filetypes = { "html", "markdown", "css", "javascript", "typescript", "json" } },
-  b.diagnostics.vacuum,
+  b.diagnostics.vacuum.with { filetypes = { "yaml" } },
   b.diagnostics.stylelint,
   -- Luav
   b.formatting.stylua,
