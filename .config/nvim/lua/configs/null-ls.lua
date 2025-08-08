@@ -7,6 +7,8 @@ local sources = {
   b.formatting.prettier.with { filetypes = { "html", "markdown", "css", "javascript", "typescript", "json" } },
   b.diagnostics.vacuum.with { filetypes = { "yaml" } },
   b.diagnostics.stylelint,
+  b.formatting.buf.with { filetypes = { "proto" } },
+  b.diagnostics.buf.with { filetypes = { "proto" } },
   -- Luav
   b.formatting.stylua,
   b.diagnostics.selene,

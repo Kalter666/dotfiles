@@ -41,6 +41,8 @@ M.mason = {
     "prettier",
     "json-lsp",
     "eslint-lsp",
+    "buf",
+    "protols",
 
     -- c/cpp stuff
     "clang-format",
