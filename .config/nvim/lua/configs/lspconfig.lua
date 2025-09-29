@@ -24,7 +24,7 @@ local servers = {
   "docker_compose_language_service",
   "taplo",
   "rust_analyzer",
-  "ts_ls",
+  "vtsls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -43,51 +43,7 @@ for _, lsp in ipairs(servers) do
 end
 -- lsps with default config
 
--- local vtslsSettings = {
---   referencesCodeLens = {
---     enable = true,
---     showOnAllFunctions = true,
---   },
---   inlayHints = {
---     parameterNames = {
---       enabled = "literals",
---     },
---     parameterTypes = {
---       enabled = true,
---     },
---     variableTypes = {
---       enabled = false,
---     },
---     propertyDeclarationTypes = {
---       enabled = true,
---     },
---     functionLikeReturnTypes = {
---       enabled = true,
---     },
---     enumMemberValues = {
---       enabled = true,
---     },
---   },
--- }
---
--- lspconfig.ts_ls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
---   on_init = on_init,
---   settings = {
---     typescript = vtslsSettings,
---     javascript = vtslsSettings,
---   },
--- }
-
-local tsSettings = {
-  init_options = {
-    preferences = {
-      -- other preferences...
-      importModuleSpecifierPreference = "relative",
-      importModuleSpecifierEnding = "minimal",
-    },
-  },
+local vtslsSettings = {
   referencesCodeLens = {
     enable = true,
     showOnAllFunctions = true,
@@ -114,15 +70,59 @@ local tsSettings = {
   },
 }
 
-vim.lsp.config("ts_ls", {
+vim.lsp.config("vtsls", {
   on_attach = on_attach,
   capabilities = capabilities,
   on_init = on_init,
   settings = {
-    typescript = tsSettings,
-    javascript = tsSettings,
+    typescript = vtslsSettings,
+    javascript = vtslsSettings,
   },
 })
+
+-- local tsSettings = {
+--   init_options = {
+--     preferences = {
+--       -- other preferences...
+--       importModuleSpecifierPreference = "relative",
+--       importModuleSpecifierEnding = "minimal",
+--     },
+--   },
+--   referencesCodeLens = {
+--     enable = true,
+--     showOnAllFunctions = true,
+--   },
+--   inlayHints = {
+--     parameterNames = {
+--       enabled = "literals",
+--     },
+--     parameterTypes = {
+--       enabled = true,
+--     },
+--     variableTypes = {
+--       enabled = false,
+--     },
+--     propertyDeclarationTypes = {
+--       enabled = true,
+--     },
+--     functionLikeReturnTypes = {
+--       enabled = true,
+--     },
+--     enumMemberValues = {
+--       enabled = true,
+--     },
+--   },
+-- }
+
+-- vim.lsp.config("ts_ls", {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   on_init = on_init,
+--   settings = {
+--     typescript = tsSettings,
+--     javascript = tsSettings,
+--   },
+-- })
 
 vim.lsp.config("rust_analyzer", {
   on_attach = on_attach,
