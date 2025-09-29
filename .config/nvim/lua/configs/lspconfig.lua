@@ -2,8 +2,8 @@
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
+require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
 local servers = {
   "html",
   "cssls",
@@ -23,10 +23,12 @@ local servers = {
   "dockerls",
   "docker_compose_language_service",
   "taplo",
+  "rust_analyzer",
+  "ts_ls",
 }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     on_attach = on_attach,
     capabilities = capabilities,
     init_options = {
@@ -37,7 +39,7 @@ for _, lsp in ipairs(servers) do
     inlay_hints = {
       enabled = true,
     },
-  }
+  })
 end
 -- lsps with default config
 
@@ -112,7 +114,7 @@ local tsSettings = {
   },
 }
 
-lspconfig.ts_ls.setup {
+vim.lsp.config("ts_ls", {
   on_attach = on_attach,
   capabilities = capabilities,
   on_init = on_init,
@@ -120,9 +122,9 @@ lspconfig.ts_ls.setup {
     typescript = tsSettings,
     javascript = tsSettings,
   },
-}
+})
 
-lspconfig.rust_analyzer.setup {
+vim.lsp.config("rust_analyzer", {
   on_attach = on_attach,
   capabilities = capabilities,
   init_options = {
@@ -166,4 +168,6 @@ lspconfig.rust_analyzer.setup {
       },
     },
   },
-}
+})
+
+vim.lsp.enable(servers)
