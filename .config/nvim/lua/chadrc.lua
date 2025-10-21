@@ -4,7 +4,7 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = {
+M.base64 = {
 	theme = "catppuccin",
 
 	-- hl_override = {

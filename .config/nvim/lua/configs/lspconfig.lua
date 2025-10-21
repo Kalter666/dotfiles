@@ -2,8 +2,8 @@
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
+require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
 local servers = {
   "html",
   "cssls",
@@ -23,10 +23,12 @@ local servers = {
   "dockerls",
   "docker_compose_language_service",
   "taplo",
+  "rust_analyzer",
+  "vtsls",
 }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     on_attach = on_attach,
     capabilities = capabilities,
     init_options = {
@@ -37,55 +39,11 @@ for _, lsp in ipairs(servers) do
     inlay_hints = {
       enabled = true,
     },
-  }
+  })
 end
 -- lsps with default config
 
--- local vtslsSettings = {
---   referencesCodeLens = {
---     enable = true,
---     showOnAllFunctions = true,
---   },
---   inlayHints = {
---     parameterNames = {
---       enabled = "literals",
---     },
---     parameterTypes = {
---       enabled = true,
---     },
---     variableTypes = {
---       enabled = false,
---     },
---     propertyDeclarationTypes = {
---       enabled = true,
---     },
---     functionLikeReturnTypes = {
---       enabled = true,
---     },
---     enumMemberValues = {
---       enabled = true,
---     },
---   },
--- }
---
--- lspconfig.ts_ls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
---   on_init = on_init,
---   settings = {
---     typescript = vtslsSettings,
---     javascript = vtslsSettings,
---   },
--- }
-
-local tsSettings = {
-  init_options = {
-    preferences = {
-      -- other preferences...
-      importModuleSpecifierPreference = "relative",
-      importModuleSpecifierEnding = "minimal",
-    },
-  },
+local vtslsSettings = {
   referencesCodeLens = {
     enable = true,
     showOnAllFunctions = true,
@@ -112,17 +70,61 @@ local tsSettings = {
   },
 }
 
-lspconfig.ts_ls.setup {
+vim.lsp.config("vtsls", {
   on_attach = on_attach,
   capabilities = capabilities,
   on_init = on_init,
   settings = {
-    typescript = tsSettings,
-    javascript = tsSettings,
+    typescript = vtslsSettings,
+    javascript = vtslsSettings,
   },
-}
+})
 
-lspconfig.rust_analyzer.setup {
+-- local tsSettings = {
+--   init_options = {
+--     preferences = {
+--       -- other preferences...
+--       importModuleSpecifierPreference = "relative",
+--       importModuleSpecifierEnding = "minimal",
+--     },
+--   },
+--   referencesCodeLens = {
+--     enable = true,
+--     showOnAllFunctions = true,
+--   },
+--   inlayHints = {
+--     parameterNames = {
+--       enabled = "literals",
+--     },
+--     parameterTypes = {
+--       enabled = true,
+--     },
+--     variableTypes = {
+--       enabled = false,
+--     },
+--     propertyDeclarationTypes = {
+--       enabled = true,
+--     },
+--     functionLikeReturnTypes = {
+--       enabled = true,
+--     },
+--     enumMemberValues = {
+--       enabled = true,
+--     },
+--   },
+-- }
+
+-- vim.lsp.config("ts_ls", {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   on_init = on_init,
+--   settings = {
+--     typescript = tsSettings,
+--     javascript = tsSettings,
+--   },
+-- })
+
+vim.lsp.config("rust_analyzer", {
   on_attach = on_attach,
   capabilities = capabilities,
   init_options = {
@@ -166,4 +168,6 @@ lspconfig.rust_analyzer.setup {
       },
     },
   },
-}
+})
+
+vim.lsp.enable(servers)
