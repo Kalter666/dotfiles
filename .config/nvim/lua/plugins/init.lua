@@ -318,11 +318,96 @@ return {
       require("grug-far").setup {}
     end,
   },
-  "williamboman/mason-lspconfig.nvim",
   {
     "zeioth/none-ls-autoload.nvim",
     event = "BufEnter",
-    dependencies = { "williamboman/mason.nvim", "nvimtools/none-ls.nvim" },
-    opts = { diagnostics = true, formatting = true, code_actions = true, completion = true, hover = true },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "zeioth/none-ls-external-sources.nvim",
+    },
+    opts = {
+      external_sources = {
+        "none-ls-external-sources.diagnostics.cpplint",
+        "none-ls-external-sources.diagnostics.eslint",
+        "none-ls-external-sources.diagnostics.eslint_d",
+        "none-ls-external-sources.diagnostics.flake8",
+        "none-ls-external-sources.diagnostics.luacheck",
+        "none-ls-external-sources.diagnostics.psalm",
+        "none-ls-external-sources.diagnostics.yamllint",
+
+        -- formatting
+        "none-ls-external-sources.formatting.autopep8",
+        "none-ls-external-sources.formatting.beautysh",
+        "none-ls-external-sources.formatting.easy-coding-standard",
+        "none-ls-external-sources.formatting.eslint",
+        "none-ls-external-sources.formatting.eslint_d",
+        "none-ls-external-sources.formatting.jq",
+        "none-ls-external-sources.formatting.latexindent",
+        "none-ls-external-sources.formatting.reformat_gherkin",
+        "none-ls-external-sources.formatting.rustfmt",
+        "none-ls-external-sources.formatting.standardrb",
+        "none-ls-external-sources.formatting.yq",
+
+        -- code actions
+        "none-ls-external-sources.code_actions.eslint",
+        "none-ls-external-sources.code_actions.eslint_d",
+        "none-ls-external-sources.code_actions.shellcheck",
+      },
+    },
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = {
+        -- lua stuff
+        "lua-language-server",
+        "stylua",
+
+        -- web dev stuff
+        "css-lsp",
+        "html-lsp",
+        "typescript-language-server",
+        "deno",
+        "prettier",
+        "json-lsp",
+        "eslint-lsp",
+        "buf",
+        "protols",
+
+        -- c/cpp stuff
+        "clang-format",
+        "rust-analyzer",
+        "selene",
+        "sqlfluff",
+        "haskell-language-server",
+        "pyright",
+        "mypy",
+        "zls",
+        "ruff-lsp",
+        "shellcheck",
+        "vacuum",
+        "actionlint",
+        "buf",
+        "cpplint",
+        "hadolint",
+        "markdownlint",
+        "marksman",
+        "revive",
+        "stylelint",
+        "cmake-language-server",
+        "yaml-language-server",
+        "gopls",
+        "angular-language-server",
+        "typos-lsp",
+        "dockerfile-language-server",
+        "docker-compose-language-service",
+        "taplo",
+        "vtls",
+      },
+    },
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
   },
 }
