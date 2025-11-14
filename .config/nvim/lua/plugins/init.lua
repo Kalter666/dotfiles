@@ -194,14 +194,6 @@ return {
     },
   },
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-  },
-  {
     "piersolenski/telescope-import.nvim",
     dependencies = "nvim-telescope/telescope.nvim",
     config = function()
@@ -317,11 +309,63 @@ return {
       require("grug-far").setup {}
     end,
   },
-  "williamboman/mason-lspconfig.nvim",
   {
     "zeioth/none-ls-autoload.nvim",
     event = "BufEnter",
-    dependencies = { "williamboman/mason.nvim", "nvimtools/none-ls.nvim" },
-    opts = { diagnostics = true, formatting = true, code_actions = true, completion = true, hover = true },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "zeioth/none-ls-external-sources.nvim", -- To install a external sources library.
+    },
+    opts = {
+      external_sources = {
+        "none-ls-external-sources.diagnostics.cpplint",
+        "none-ls-external-sources.diagnostics.eslint",
+        "none-ls-external-sources.diagnostics.eslint_d",
+        "none-ls-external-sources.diagnostics.flake8",
+        "none-ls-external-sources.diagnostics.luacheck",
+        "none-ls-external-sources.diagnostics.psalm",
+        "none-ls-external-sources.diagnostics.yamllint",
+
+        -- formatting
+        "none-ls-external-sources.formatting.autopep8",
+        "none-ls-external-sources.formatting.beautysh",
+        "none-ls-external-sources.formatting.easy-coding-standard",
+        "none-ls-external-sources.formatting.eslint",
+        "none-ls-external-sources.formatting.eslint_d",
+        "none-ls-external-sources.formatting.jq",
+        "none-ls-external-sources.formatting.latexindent",
+        "none-ls-external-sources.formatting.reformat_gherkin",
+        "none-ls-external-sources.formatting.rustfmt",
+        "none-ls-external-sources.formatting.standardrb",
+        "none-ls-external-sources.formatting.yq",
+
+        -- code actions
+        "none-ls-external-sources.code_actions.eslint",
+        "none-ls-external-sources.code_actions.eslint_d",
+        "none-ls-external-sources.code_actions.shellcheck",
+      },
+    },
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      enabled = true,
+      completions = { lsp = { enabled = true } },
+    },
+    ft = "markdown",
+    cmd = { "RenderMarkdown" },
   },
 }
