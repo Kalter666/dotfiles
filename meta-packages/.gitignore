@@ -1,0 +1,11 @@
+# Binary packages
+*.pkg.tar.zst
+*.pkg.tar.xz
+
+# Build directories
+src/
+pkg/
+
+# Log files and assets
+*.log
+*.sig

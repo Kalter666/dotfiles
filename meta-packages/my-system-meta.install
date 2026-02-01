@@ -1,0 +1,36 @@
+post_install() {
+    echo "--- Post-Installation Automations ---"
+
+    # 1. Enable Docker service immediately
+    systemctl enable --now docker.service
+    echo ">> Docker service enabled."
+
+    # 2. Setup Docker group (so you don't need sudo)
+    if ! getent group docker > /dev/null; then
+        groupadd docker
+    fi
+    usermod -aG docker $USER
+    echo ">> User added to Docker group."
+
+    # 3. Initialize Rustup
+    if command -v rustup > /dev/null; then
+        rustup default stable
+        echo ">> Rustup set to stable."
+    fi
+
+    # 4. Applying dotfiles
+    DOTFILES_DIR="$HOME/dotfiles"
+    if [ -d "$DOTFILES_DIR" ]; then
+        echo ">> Applying dotfiles with GNU Stow..."
+        cd "$DOTFILES_DIR"
+        stow .
+    else
+        echo ">> Dotfiles directory not found at $HOME/dotfiles, skipping stow."
+    fi
+
+    echo "NOTE: You may need to log out and back in for group changes (Docker) to take effect."
+}
+
+post_upgrade() {
+    post_install
+}

@@ -1,0 +1,40 @@
+pkgname=my-system-meta
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Personal meta-package for Arch and AUR apps"
+arch=('any')
+url="https://github.com/your-username/your-dots"
+license=('MIT')
+
+install=$pkgname.install
+
+depends=(
+    # --- CORE & SYSTEM ---
+    'base-devel' 'stow' 'reflector' 'wl-clipboard' 'unzip'
+    
+    # --- SHELL & TERMINAL ---
+    'ghostty' 'zsh' 'zsh-autosuggestions' 'zsh-syntax-highlighting'
+    'oh-my-zsh-git' 'tmux' 'gitmux-bin'
+    
+    # --- MODERN CLI ---
+    'bat' 'eza' 'fzf' 'zoxide' 'yazi'
+    
+    # --- DOCKER ---
+    'docker' 'docker-compose' 'docker-buildx' 'lazydocker'
+    
+    # --- DEVELOPMENT ---
+    'neovim' 'lazygit' 'visual-studio-code-bin' 'go' 'rustup' 
+    'nvm' 'd2' 'k9s' 'kubectl' 'dbeaver' 'redisinsight'
+    
+    # --- GUI ---
+    'brave-bin' 'telegram-desktop' 'thunderbird' 'bitwarden' 
+    'bruno-bin' 'filezilla' 'gimp' 'libreoffice-fresh' 
+    'vlc' 'vlc-plugin-ffmpeg' 'ghostscript'
+    
+    # --- FONTS ---
+    'ttf-firacode-nerd'
+)
+
+package() {
+    install -Dm644 /dev/null "$pkgdir/usr/share/factory/$pkgname/.installed"
+}
