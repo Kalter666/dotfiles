@@ -14,6 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.lsp.inlay_hint.enable(true)
 
+vim.opt.scrolloff = 15
+
 local lazy_config = require "configs.lazy"
 
 -- load plugins
