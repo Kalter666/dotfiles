@@ -43,6 +43,14 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    build = ":TSUpdate",
+    lazy = false, -- important: load immediately, not lazily
+    config = function(_, opts)
+      vim.opt.runtimepath:append(vim.fn.stdpath "data" .. "/lazy/nvim-treesitter/runtime")
+      vim.opt.runtimepath:append(vim.fn.stdpath "data" .. "/site")
+      require("nvim-treesitter").setup(opts)
+    end,
     opts = overrides.treesitter,
   },
   {

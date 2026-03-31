@@ -1,7 +1,7 @@
 local M = {}
 
 M.treesitter = {
-  auto_install = true,
+  prefer_git = true,
   ensure_installed = {
     "vim",
     "lua",
@@ -18,12 +18,6 @@ M.treesitter = {
     "jsdoc",
     "comment",
     "ispc",
-  },
-  indent = {
-    enable = true,
-    -- disable = {
-    --   "python"
-    -- },
   },
 }
 
