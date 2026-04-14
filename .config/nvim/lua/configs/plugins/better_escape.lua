@@ -1,4 +1,4 @@
-require("better_escape").setup {
+return {
   mappings = {
     t = {
       j = {

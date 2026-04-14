@@ -5,7 +5,13 @@ local sources = {
 
   -- webdev stuff
   b.formatting.prettier.with { filetypes = { "html", "markdown", "css", "javascript", "typescript", "json" } },
-  b.diagnostics.vacuum.with { filetypes = { "yaml" } },
+  b.diagnostics.vacuum.with {
+    filetypes = { "yaml", "json" },
+    runtime_condition = function(params)
+      local name = vim.fs.basename(params.bufname):lower()
+      return name:match "openapi" ~= nil or name:match "swagger" ~= nil
+    end,
+  },
   b.diagnostics.stylelint,
   b.formatting.buf.with { filetypes = { "proto" } },
   b.diagnostics.buf.with { filetypes = { "proto" } },

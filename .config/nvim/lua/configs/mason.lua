@@ -1,39 +1,9 @@
-local M = {}
+local base = require "nvchad.configs.mason"
 
-M.treesitter = {
-  auto_install = true,
-  ensure_installed = {
-    "vim",
-    "lua",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "tsx",
-    "c",
-    "markdown",
-    "markdown_inline",
-    "rust",
-    "zig",
-    "jsdoc",
-    "comment",
-    "ispc",
-  },
-  indent = {
-    enable = true,
-    -- disable = {
-    --   "python"
-    -- },
-  },
-}
-
-M.mason = {
+return vim.tbl_deep_extend("force", base, {
   pkgs = {
-    -- lua stuff
     "lua-language-server",
     "stylua",
-
-    -- web dev stuff
     "css-lsp",
     "html-lsp",
     "typescript-language-server",
@@ -43,8 +13,6 @@ M.mason = {
     "eslint-lsp",
     "buf",
     "protols",
-
-    -- c/cpp stuff
     "clang-format",
     "rust-analyzer",
     "selene",
@@ -74,22 +42,4 @@ M.mason = {
     "taplo",
     "vtls",
   },
-}
-
--- git support in nvimtree
-M.nvimtree = {
-  git = {
-    enable = true,
-  },
-
-  renderer = {
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
-      },
-    },
-  },
-}
-
-return M
+})
