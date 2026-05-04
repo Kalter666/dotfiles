@@ -9,7 +9,6 @@ local servers = {
   "cssls",
   "clangd",
   "pyright",
-  "angularls",
   "hls",
   "eslint",
   "ruff",
@@ -170,4 +169,28 @@ vim.lsp.config("rust_analyzer", {
   },
 })
 
-vim.lsp.enable(servers)
+local angular_root = function(bufnr, on_dir)
+  local fname = vim.api.nvim_buf_get_name(bufnr)
+  local root = vim.fs.root(fname, { "angular.json" })
+
+  if root then
+    on_dir(root)
+  end
+end
+
+vim.lsp.config("angularls", {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  on_init = on_init,
+
+  root_dir = angular_root,
+
+  inlay_hints = {
+    enabled = true,
+  },
+})
+
+vim.lsp.enable(vim.list_extend(servers, {
+  "angularls",
+}))
+
