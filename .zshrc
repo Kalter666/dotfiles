@@ -167,10 +167,6 @@ alias vim=nvim
 alias mg=mambembe
 eval "$(zoxide init zsh)"
 
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-
 export FPATH="./config/eza-community/completions/zsh:$FPATH"
 alias e="eza --icons=always"
 alias lzd='lazydocker'
