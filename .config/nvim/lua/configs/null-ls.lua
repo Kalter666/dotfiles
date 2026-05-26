@@ -12,6 +12,7 @@
 
 ---@type NullLs
 local null_ls = require "null-ls"
+local sql_dialect = require "configs.sql_dialect"
 
 ---@type NullLsBuiltins
 local b = null_ls.builtins
@@ -44,10 +45,16 @@ local sources = {
     },
   },
   b.formatting.sqlfluff.with {
-    extra_args = { "--dialect", "postgres" },
+    filetypes = { "sql", "mysql" },
+    extra_args = sql_dialect.extra_args,
+    timeout = 15000,
   },
-  b.diagnostics.sqlfluff,
-  b.diagnostics.stylelint,
+  b.diagnostics.sqlfluff.with {
+    filetypes = { "sql", "mysql" },
+    extra_args = sql_dialect.extra_args,
+    timeout = 15000,
+  },
+  b.diagnostics.stylelint.with { timeout = 10000 },
   b.diagnostics.vacuum.with { filetypes = { "yaml" } },
 
   -- Lua
@@ -55,7 +62,7 @@ local sources = {
   b.diagnostics.selene,
 
   -- Python
-  b.diagnostics.mypy,
+  b.diagnostics.mypy.with { timeout = 12000 },
 
   -- Go
   b.formatting.goimports,
@@ -70,15 +77,19 @@ local sources = {
   -- Shell / CI / containers
   b.formatting.shfmt.with { filetypes = { "bash", "sh", "zsh" } },
   b.diagnostics.actionlint,
-  b.diagnostics.hadolint,
+  b.diagnostics.hadolint.with { timeout = 10000 },
 
   -- Markdown / diagrams
-  b.diagnostics.markdownlint,
+  b.diagnostics.markdownlint.with { timeout = 10000 },
   b.formatting.d2_fmt,
 }
 
 null_ls.setup {
   debug = false,
   sources = sources,
-  debounce = 500,
+  default_timeout = 10000,
+  debounce = 1000,
+  update_in_insert = false,
 }
+
+sql_dialect.setup()

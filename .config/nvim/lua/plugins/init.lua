@@ -35,6 +35,30 @@ return {
   },
 
   {
+    "stevearc/conform.nvim",
+    opts = function(_, opts)
+      opts.default_format_opts = vim.tbl_deep_extend("force", opts.default_format_opts or {}, {
+        timeout_ms = 15000,
+        lsp_format = "fallback",
+      })
+
+      opts.formatters_by_ft = vim.tbl_deep_extend("force", opts.formatters_by_ft or {}, {
+        sql = { "sqlfluff" },
+        mysql = { "sqlfluff" },
+      })
+
+      opts.formatters = vim.tbl_deep_extend("force", opts.formatters or {}, {
+        sqlfluff = {
+          command = "sqlfluff",
+          args = require("configs.sql_dialect").conform_args,
+          stdin = true,
+          require_cwd = false,
+        },
+      })
+    end,
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     build = ":TSUpdate",
