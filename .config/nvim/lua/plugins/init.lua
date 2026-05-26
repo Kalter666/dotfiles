@@ -31,14 +31,7 @@ return {
     },
     config = function()
       require "configs.lspconfig"
-      require "configs.lspconfig"
     end, -- Override to setup mason-lspconfig
-  },
-
-  -- override plugin configs
-  {
-    "williamboman/mason.nvim",
-    opts = overrides.mason,
   },
 
   {
@@ -47,8 +40,6 @@ return {
     build = ":TSUpdate",
     lazy = false, -- important: load immediately, not lazily
     config = function(_, opts)
-      -- vim.opt.runtimepath:append(vim.fn.stdpath "data" .. "/lazy/nvim-treesitter/runtime")
-      -- vim.opt.runtimepath:append(vim.fn.stdpath "data" .. "/site")
       require("nvim-treesitter").setup(opts)
     end,
     opts = overrides.treesitter,
@@ -93,18 +84,6 @@ return {
     ft = { "d2" },
     lazy = true,
   },
-  -- {
-  --   "Exafunction/codeium.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "hrsh7th/nvim-cmp",
-  --   },
-  --   cmd = "Codeium",
-  --   config = function()
-  --     require("codeium").setup {}
-  --   end,
-  --   lazy = false,
-  -- },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -138,7 +117,6 @@ return {
     config = function(_, opts)
       require("todo-comments").setup(opts)
     end,
-    lazy = false,
   },
   {
     "m-demare/hlargs.nvim",
@@ -157,30 +135,26 @@ return {
         desc = "Advanced Replace",
       },
     },
-    {
-      "kdheepak/lazygit.nvim",
-      cmd = { "LazyGit", "LazyGitFilter", "LazyGitFilterCurrentFile" },
-      dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
-      keys = {
-        {
-          "<leader>gl",
-          "<cmd>LazyGit<cr>",
-          desc = "Open LazyGit",
-        },
-        {
-          "<leader>gf",
-          "<cmd>LazyGitFilter<cr>",
-          desc = "Open LazyGitFilter",
-        },
-      },
-      config = function()
-        require("telescope").load_extension "lazygit"
-      end,
-    },
   },
   {
-    "ryanoasis/vim-devicons",
-    config = true,
+    "kdheepak/lazygit.nvim",
+    cmd = { "LazyGit", "LazyGitFilter", "LazyGitFilterCurrentFile" },
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    keys = {
+      {
+        "<leader>gl",
+        "<cmd>LazyGit<cr>",
+        desc = "Open LazyGit",
+      },
+      {
+        "<leader>gf",
+        "<cmd>LazyGitFilter<cr>",
+        desc = "Open LazyGitFilter",
+      },
+    },
+    config = function()
+      require("telescope").load_extension "lazygit"
+    end,
   },
   {
     "nvimdev/lspsaga.nvim",
@@ -249,7 +223,7 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    tag = "legacy",
+    version = "*",
     event = "LspAttach",
     opts = {},
     config = function(_, opts)
@@ -330,7 +304,7 @@ return {
     "zeioth/none-ls-autoload.nvim",
     event = "BufEnter",
     dependencies = {
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
       "zeioth/none-ls-external-sources.nvim",
     },
     opts = {
@@ -365,58 +339,18 @@ return {
   },
   {
     "mason-org/mason-lspconfig.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
-      ensure_installed = {
-        -- lua stuff
-        "lua-language-server",
-        "stylua",
-
-        -- web dev stuff
-        "css-lsp",
-        "html-lsp",
-        "typescript-language-server",
-        "deno",
-        "prettier",
-        "json-lsp",
-        "eslint-lsp",
-        "buf",
-        "protols",
-
-        -- c/cpp stuff
-        "clang-format",
-        "rust-analyzer",
-        "selene",
-        "sqlfluff",
-        "haskell-language-server",
-        "pyright",
-        "mypy",
-        "zls",
-        "ruff-lsp",
-        "shellcheck",
-        "vacuum",
-        "actionlint",
-        "buf",
-        "cpplint",
-        "hadolint",
-        "markdownlint",
-        "marksman",
-        "revive",
-        "stylelint",
-        "cmake-language-server",
-        "yaml-language-server",
-        "gopls",
-        "angular-language-server",
-        "typos-lsp",
-        "dockerfile-language-server",
-        "docker-compose-language-service",
-        "taplo",
-        "vtls",
-      },
+      automatic_enable = true,
     },
     dependencies = {
-      { "mason-org/mason.nvim", opts = {} },
+      "mason-org/mason.nvim",
       "neovim/nvim-lspconfig",
     },
+    config = function(_, opts)
+      require("mason-lspconfig").setup(opts)
+      require("configs.lsp_autoinstall").setup()
+    end,
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
