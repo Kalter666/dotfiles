@@ -12,7 +12,10 @@
 
 ---@type NullLs
 local null_ls = require "null-ls"
-local sql_dialect = require "configs.sql_dialect"
+
+local function sqlfluff_args(params)
+  return require("sqweerrel").extra_args(params)
+end
 
 ---@type NullLsBuiltins
 local b = null_ls.builtins
@@ -46,12 +49,12 @@ local sources = {
   },
   b.formatting.sqlfluff.with {
     filetypes = { "sql", "mysql" },
-    extra_args = sql_dialect.extra_args,
+    extra_args = sqlfluff_args,
     timeout = 15000,
   },
   b.diagnostics.sqlfluff.with {
     filetypes = { "sql", "mysql" },
-    extra_args = sql_dialect.extra_args,
+    extra_args = sqlfluff_args,
     timeout = 15000,
   },
   b.diagnostics.stylelint.with { timeout = 10000 },
@@ -91,5 +94,3 @@ null_ls.setup {
   debounce = 1000,
   update_in_insert = false,
 }
-
-sql_dialect.setup()

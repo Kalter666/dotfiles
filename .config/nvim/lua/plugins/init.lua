@@ -50,7 +50,9 @@ return {
       opts.formatters = vim.tbl_deep_extend("force", opts.formatters or {}, {
         sqlfluff = {
           command = "sqlfluff",
-          args = require("configs.sql_dialect").conform_args,
+          args = function(self, ctx)
+            return require("sqweerrel").conform_args(self, ctx)
+          end,
           stdin = true,
           require_cwd = false,
         },
@@ -285,6 +287,15 @@ return {
   },
   {
     "RRethy/vim-illuminate",
+  },
+  {
+    "Kalter666/sqweerrel.nvim",
+    version = "*",
+    ft = { "sql", "mysql" },
+    cmd = "Sqweerrel",
+    opts = {
+      sqlfluff_config = vim.fn.stdpath "config" .. "/lua/configs/sqlfluff-align.cfg",
+    },
   },
   { import = "nvchad.blink.lazyspec" },
   ---@type LazySpec
