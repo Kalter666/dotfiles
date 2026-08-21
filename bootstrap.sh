@@ -23,3 +23,19 @@ echo "paru installed. Now syncing your meta-package..."
 
 cd ~/dotfiles/system-meta
 paru -S . --needed
+
+echo "Applying per-user setup..."
+
+sudo usermod -aG docker "$USER"
+echo ">> $USER added to docker group."
+
+if command -v rustup > /dev/null; then
+    rustup default stable
+    echo ">> Rustup set to stable."
+fi
+
+cd ~/dotfiles
+stow .
+echo ">> Dotfiles symlinked with stow."
+
+echo "NOTE: Log out and back in for the docker group change to take effect."

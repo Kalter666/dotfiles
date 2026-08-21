@@ -1,6 +1,9 @@
 # ~/dotfiles/.stow-local-ignore
 system-meta
 .git
+.gitignore
 .stow-local-ignore
+bootstrap.sh
+sync.sh
 README.md
 LICENSE
