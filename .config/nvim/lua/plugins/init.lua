@@ -297,6 +297,19 @@ return {
       sqlfluff_config = vim.fn.stdpath "config" .. "/lua/configs/sqlfluff-align.cfg",
     },
   },
+  {
+    -- honk requests from .http files: HTTP (curl), GRPC (grpcurl), WS (websocat)
+    "Kalter666/gooseman.nvim",
+    ft = "http",
+    cmd = "Honk",
+    keys = {
+      { "<leader>Rs", "<cmd>Honk<cr>", ft = "http", desc = "Send request under cursor" },
+      { "<leader>Ra", "<cmd>Honk all<cr>", ft = "http", desc = "Run all requests in file" },
+      { "<leader>Re", "<cmd>Honk env<cr>", ft = "http", desc = "Pick environment" },
+      { "<leader>Rl", "<cmd>Honk last<cr>", desc = "Re-send last request" },
+      { "<leader>Rp", "<cmd>Honk pick<cr>", desc = "Pick a request" },
+    },
+  },
   { import = "nvchad.blink.lazyspec" },
   ---@type LazySpec
   {
