@@ -389,7 +389,8 @@ return {
     "mason-org/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      automatic_enable = true,
+      -- superseded by TS7 `tsc`
+      automatic_enable = { exclude = { "ts_ls", "tsgo", "vtsls" } },
     },
     dependencies = {
       "mason-org/mason.nvim",

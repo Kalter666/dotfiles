@@ -30,7 +30,7 @@ local servers = {
     filetypes = { "dockerfile" },
   },
   eslint = {
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
     root_markers = {
       ".eslintrc",
       ".eslintrc.cjs",
@@ -78,13 +78,17 @@ local servers = {
     filetypes = { "rust" },
     root_markers = { "Cargo.toml" },
   },
+  svelte = {
+    filetypes = { "svelte" },
+    root_markers = { "package.json" },
+  },
   taplo = {
     filetypes = { "toml" },
   },
   typos_lsp = {
     filetypes = { "gitcommit", "markdown", "text" },
   },
-  vtsls = {
+  tsc = {
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
   },

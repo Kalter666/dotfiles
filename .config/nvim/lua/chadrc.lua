@@ -19,7 +19,6 @@ M.mason = {
     "stylua",
     "css-lsp",
     "html-lsp",
-    "typescript-language-server",
     "deno",
     "prettier",
     "json-lsp",
@@ -52,7 +51,8 @@ M.mason = {
     "dockerfile-language-server",
     "docker-compose-language-service",
     "taplo",
-    "vtsls",
+    "tsc",
+    "svelte-language-server",
   },
 }
 

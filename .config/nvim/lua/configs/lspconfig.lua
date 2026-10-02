@@ -24,66 +24,18 @@ local function with_attach(extra)
   end
 end
 
-local function ts_inlay_hints()
-  return {
-    parameterNames = { enabled = "literals" },
-    parameterTypes = { enabled = true },
-    variableTypes = { enabled = false },
-    propertyDeclarationTypes = { enabled = true },
-    functionLikeReturnTypes = { enabled = true },
-    enumMemberValues = { enabled = true },
-  }
-end
-
-local ts_preferences = {
-  disableSuggestions = true,
-  importModuleSpecifierPreference = "shortest",
-  importModuleSpecifierEnding = "minimal",
-  includePackageJsonAutoImports = "auto",
-  quotePreference = "auto",
-}
-
-vim.lsp.config("vtsls", with_defaults {
-  init_options = {
-    hostInfo = "neovim",
-  },
+vim.lsp.config("tsc", with_defaults {
   settings = {
-    vtsls = {
-      autoUseWorkspaceTsdk = true,
-      enableMoveToFileCodeAction = true,
-      experimental = {
-        completion = {
-          enableServerSideFuzzyMatch = true,
-        },
+    ["js/ts"] = {
+      preferences = {
+        importModuleSpecifier = "shortest",
+        importModuleSpecifierEnding = "minimal",
+        quoteStyle = "auto",
       },
-    },
-    typescript = {
-      preferences = ts_preferences,
-      suggest = {
-        completeFunctionCalls = false,
+      inlayHints = {
+        parameterNames = { enabled = "literals" },
+        variableTypes = { enabled = false },
       },
-      updateImportsOnFileMove = {
-        enabled = "always",
-      },
-      referencesCodeLens = {
-        enabled = true,
-        showOnAllFunctions = true,
-      },
-      inlayHints = ts_inlay_hints(),
-    },
-    javascript = {
-      preferences = ts_preferences,
-      suggest = {
-        completeFunctionCalls = false,
-      },
-      updateImportsOnFileMove = {
-        enabled = "always",
-      },
-      referencesCodeLens = {
-        enabled = true,
-        showOnAllFunctions = true,
-      },
-      inlayHints = ts_inlay_hints(),
     },
   },
 })
@@ -450,9 +402,10 @@ vim.lsp.enable {
   "pyright",
   "ruff",
   "rust_analyzer",
+  "svelte",
   "taplo",
   "typos_lsp",
-  "vtsls",
+  "tsc",
   "yamlls",
   "zls",
 }
